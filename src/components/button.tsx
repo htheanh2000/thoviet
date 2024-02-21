@@ -8,12 +8,13 @@ interface ButtonProps {
   onPress?: (event: GestureResponderEvent) => void;
   style?: object;
   textStyle?: object;
-  type?: 'primary' | 'secondary' 
+  type?: 'primary' | 'secondary' ;
+  size?: 'medium' | 'large';
 }
 
-const Button: React.FC<ButtonProps> = ({ title, onPress, style, textStyle, type='primary' }) => {
+const Button: React.FC<ButtonProps> = ({ title, onPress, style, textStyle,size= 'medium', type='primary' }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.button, styles[type] ,style ]}>
+    <TouchableOpacity onPress={onPress} style={[styles.button, styles[type], styles[size] ,style ]}>
       <Text style={[styles.text, styles[`text-${type}`], textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
@@ -22,8 +23,7 @@ const Button: React.FC<ButtonProps> = ({ title, onPress, style, textStyle, type=
 // Default styles for the button
 const styles = StyleSheet.create({
   button: {
-    width: 145,
-    height: 50,
+    
     borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
@@ -43,6 +43,14 @@ const styles = StyleSheet.create({
   },
   secondary: {
     backgroundColor: '#F9F9FB'
+  },
+  medium: {
+    width: 145,
+    height: 50,
+  },
+  large: {
+    width: 290,
+    height: 50,
   }
 });
 
