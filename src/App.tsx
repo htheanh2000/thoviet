@@ -7,12 +7,11 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import SplashScreen from './screens/spash';
 
 function Feed() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Feed Screen</Text>
-    </View>
+    <SplashScreen/>
   );
 }
 
@@ -40,7 +39,7 @@ function MyDrawer() {
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
-      <Drawer.Screen name="Feed" component={Feed} />
+      <Drawer.Screen name="Feed" component={SplashScreen} />
       <Drawer.Screen name="Article" component={Article} />
     </Drawer.Navigator>
   );
