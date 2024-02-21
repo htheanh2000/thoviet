@@ -8,6 +8,7 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 import SplashScreen from './screens/spash';
+import OnBoardingScreen from './screens/onboarding';
 
 function Feed() {
   return (
@@ -39,7 +40,7 @@ function MyDrawer() {
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
-      <Drawer.Screen name="Feed" component={SplashScreen} />
+      <Drawer.Screen name="Feed" component={OnBoardingScreen} />
       <Drawer.Screen name="Article" component={Article} />
     </Drawer.Navigator>
   );
@@ -48,7 +49,8 @@ function MyDrawer() {
 export default function App() {
   return (
     <NavigationContainer>
-      <MyDrawer />
+      <OnBoardingScreen/>
+      {/* <MyDrawer /> */}
     </NavigationContainer>
   );
 }
