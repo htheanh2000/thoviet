@@ -96,7 +96,7 @@ const SignUpScreen = () => {
                                 placeholder="Re-type Password"
                                 secureTextEntry // Hide password input
                                 icon='Key'
-                                label='Re-type Password'
+                                label='Retype your password'
                             // Add styles as needed
                             />
                             {touched.retypePassword && errors.retypePassword && <Text style={styles.error}>{errors.retypePassword}</Text>}
@@ -117,9 +117,9 @@ const getStyles = (theme: 'light' | 'dark') => StyleSheet.create({
         backgroundColor: THEME[theme].white,
         height: '100%',
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
-        marginTop: 32
+        paddingTop: 48
     },
     logo: {
     },

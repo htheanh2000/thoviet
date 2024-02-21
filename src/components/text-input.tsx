@@ -16,7 +16,6 @@ interface CustomTextInputProps extends TextInputProps {
 const CustomTextInput: React.FC<CustomTextInputProps> = ({ style, label, icon, placeholder = '', secureTextEntry = false, ...props }) => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
     return (
-        <GestureHandlerRootView>
             <View style={[styles.container, style]}>
                 {label && <Text style={styles.label}>{label}</Text>}
                 <View style={styles.textInputView}>
@@ -41,7 +40,6 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({ style, label, icon, p
                     }
                 </View>
             </View>
-        </GestureHandlerRootView>
     );
 };
 
