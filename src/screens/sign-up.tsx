@@ -38,7 +38,7 @@ const SignUpScreen = () => {
             <View style={styles.header}>
                 <Image style={styles.logo} source={logo} />
                 <Text style={styles.textHeader}>Sign up</Text>
-                <Text style={styles.subtitle}>Please enter your details to sign up and create an account.</Text>
+                <Text style={[styles.subtitle, {maxWidth: width * 0.9 }]}>Please enter your details to sign up and create an account.</Text>
             </View>
             <View>
 
@@ -133,7 +133,6 @@ const getStyles = (theme: 'light' | 'dark') => StyleSheet.create({
         fontSize: 16,
         lineHeight: 24,
         color: '#38385E',
-        maxWidth: 300,
         textAlign: 'center'
     },
     textHeader: {
@@ -141,6 +140,7 @@ const getStyles = (theme: 'light' | 'dark') => StyleSheet.create({
         fontSize: 28,
         lineHeight: 32,
         fontWeight: 'bold',
+        color: '#1F126B',
         marginVertical: 16
     },
     formContainer: {

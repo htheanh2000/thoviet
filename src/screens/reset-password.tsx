@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Alert, Dimensions, Image, StyleSheet, TouchableHighlight, useColorScheme, View } from 'react-native'
-import logo from '@/assets/images/logo_icon.png'
+import key from '@/assets/images/key.png'
 import { THEME } from '@/constant/color'
 import { Formik } from 'formik'
 import Button from '@/components/button'
 import * as Yup from 'yup';
 import Text from '@/components/text'
 import TextInput from '@/components/text-input'
-import { GestureHandlerRootView, NativeViewGestureHandler, TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 import Container from '@/components/container'
 
-const SignInScreen = () => {
+const ResetPassword = () => {
     const theme = useColorScheme() || 'light';
     const width = Dimensions.get('window').width; //full width
     const styles = getStyles(theme);
@@ -19,34 +18,20 @@ const SignInScreen = () => {
     // Validation schema using Yup
     const LoginSchema = Yup.object().shape({
         phonenumber: Yup.string()
-            .required("Phone number must be provided."),
-        password: Yup.string()
-            .required("Password must be provided.")
-            .matches(
-                /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}":;'<>?,./]).{8,}$/,
-                "Password must have at least 8 characters including 1 uppercase letter, 1 special character and alphanumeric characters"
-            )
-        ,
-
+            .required("Phone number must be provided.")
     });
 
     return (
         <Container>
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Image source={logo} />
-                    <Text style={styles.textHeader}>Sign in</Text>
+                    <Image source={key} />
+                    <Text style={styles.textHeader}>Reset your password</Text>
                     <View >
-                    <Text style={[styles.subtitle]}>
-                        Welcome back!
+                    <Text style={[styles.subtitle, {maxWidth: width * 0.9 }]}>
+                    Please enter your number. We will send a code to your phone to reset your password.
                     </Text>
                     <View style={styles.row}>
-                    <Text style={[styles.subtitle]}>
-                        Don’t have an account ?
-                    </Text>
-                        <TouchableOpacity onPress={()=> navigation.navigate('sign-up' as never)}>
-                        <Text style={[styles.subtitle, styles.signupText]}> Sign up</Text>
-                    </TouchableOpacity>
                     </View>
                     </View>
                     
@@ -54,7 +39,7 @@ const SignInScreen = () => {
                 <View>
 
                     <Formik
-                        initialValues={{ phonenumber: '', password: '' }}
+                        initialValues={{ phonenumber: '' }}
                         validationSchema={LoginSchema}
                         onSubmit={(values) => {
                             // Handle form submission here
@@ -69,25 +54,11 @@ const SignInScreen = () => {
                                     value={values.phonenumber}
                                     placeholder="+84 782778712"
                                     label='Phone number'
-                                    icon='Man'
+                                    icon='Phone'
                                 // Add styles as needed
                                 />
                                 {touched.phonenumber && errors.phonenumber && <Text style={styles.error}>{errors.phonenumber}</Text>}
-
-                                <TextInput
-                                    style={{ marginTop: 24 }}
-                                    onChangeText={handleChange('password')}
-                                    onBlur={handleBlur('password')}
-                                    value={values.password}
-                                    placeholder="Password"
-                                    secureTextEntry // Hide password input
-                                    icon='Key'
-                                    label='Your password'
-                                // Add styles as needed
-                                />
-                                {touched.password && errors.password && <Text style={styles.error}>{errors.password}</Text>}
-
-                                <Button size='large' style={styles.button} onPress={() => handleSubmit} title="Sign In" />
+                                <Button size='large' style={styles.button} onPress={() => handleSubmit} title="Send my code" />
                             </View>
                         )}
                     </Formik>
@@ -128,7 +99,6 @@ const getStyles = (theme: 'light' | 'dark') => StyleSheet.create({
         fontSize: 16,
         lineHeight: 24,
         color: '#38385E',
-        maxWidth: 300,
         fontWeight: '400',
         textAlign: 'center'
     },
@@ -162,7 +132,4 @@ const getStyles = (theme: 'light' | 'dark') => StyleSheet.create({
 })
 
 
-
-
-
-export default SignInScreen
+export default ResetPassword

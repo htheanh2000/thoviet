@@ -13,7 +13,7 @@ import SplashScreen from './screens/spash';
 import OnBoardingScreen from './screens/onboarding';
 import SignInScreen from './screens/sign-in';
 import SignUpScreen from './screens/sign-up';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import ResetPassword from './screens/reset-password';
 
 function Article() {
   return (
@@ -50,11 +50,12 @@ function DrawerNavigation() {
 const Navigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='sign-in'>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='reset-password'>
         <Stack.Screen name="spash" component={SplashScreen} />
         <Stack.Screen name="onboarding" component={OnBoardingScreen} />
         <Stack.Screen name="sign-in" component={SignInScreen} />
         <Stack.Screen name="sign-up" component={SignUpScreen} />
+        <Stack.Screen name="reset-password" component={ResetPassword} />
         <Stack.Screen name="drawer" component={DrawerNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
