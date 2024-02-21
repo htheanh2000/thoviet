@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, Dimensions, Image, StyleSheet, useColorScheme, View } from 'react-native'
-import logo from '@/assets/images/logo_icon.png'
+import { Alert, Dimensions, Image, StyleSheet, TouchableHighlight, useColorScheme, View } from 'react-native'
+import key from '@/assets/images/key.png'
 import { THEME } from '@/constant/color'
 import { Formik } from 'formik'
 import Button from '@/components/button'
 import * as Yup from 'yup';
 import Text from '@/components/text'
 import TextInput from '@/components/text-input'
-import Icon from '@/components/icon'
+import { useNavigation } from '@react-navigation/native'
+import Container from '@/components/container'
 
-const SignUpScreen = () => {
+const CreatePasswordScreen = () => {
     const theme = useColorScheme() || 'light';
     const width = Dimensions.get('window').width; //full width
     const styles = getStyles(theme);
-
+    const navigation = useNavigation()
     // Validation schema using Yup
     const schema = Yup.object().shape({
-        name: Yup.string().required('Name must be provided'),
-        email: Yup.string()
-            .email("Invalid email.")
-            .required("Email must be provided."),
         password: Yup.string()
             .required("Password must be provided.")
             .matches(
@@ -30,52 +27,35 @@ const SignUpScreen = () => {
         retypePassword: Yup.string()
         .oneOf([Yup.ref('password'), ''], 'Passwords must match')
         .required('Confirming your password is required'),
-
     });
 
     return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <Image style={styles.logo} source={logo} />
-                <Text style={styles.textHeader}>Sign up</Text>
-                <Text style={[styles.subtitle, {maxWidth: width * 0.9 }]}>Please enter your details to sign up and create an account.</Text>
-            </View>
-            <View>
+        <Container>
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <Image source={key} />
+                    <Text style={styles.textHeader}>Create new password</Text>
+                    <View >
+                    <Text style={[styles.subtitle, {maxWidth: width * 0.9 }]}>
+                    Please set a new and strong password                    </Text>
+                    <View style={styles.row}>
+                    </View>
+                    </View>
+                    
+                </View>
+                <View>
 
-                <Formik
-                    initialValues={{ email: '', password: '', name: '', retypePassword: '' }}
-                    validationSchema={schema}
-                    onSubmit={(values) => {
-                        // Handle form submission here
-                        Alert.alert('Login Submitted', JSON.stringify(values));
-                    }}
-                >
-                    {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-                        <View style={[styles.formContainer, { width: width * 0.9 }]}>
-
-                            <TextInput
-                                onChangeText={handleChange('name')}
-                                onBlur={handleBlur('name')}
-                                value={values.name}
-                                placeholder="John Smith"
-                                label='Your name'
-                                icon='Man'
-                            // Add styles as needed
-                            />
-                            {touched.name && errors.name && <Text style={styles.error}>{errors.name}</Text>}
-
-                            <TextInput
-                                style={{ marginTop: 24 }}
-                                onChangeText={handleChange('email')}
-                                onBlur={handleBlur('email')}
-                                value={values.email}
-                                placeholder="Email"
-                                label='Your email'
-                                icon='Man'
-                            // Add styles as needed
-                            />
-                            {touched.email && errors.email && <Text style={styles.error}>{errors.email}</Text>}
-                            <TextInput
+                    <Formik
+                        initialValues={{ password: '', retypePassword: '' }}
+                        validationSchema={schema}
+                        onSubmit={(values) => {
+                            // Handle form submission here
+                            Alert.alert('Login Submitted', JSON.stringify(values));
+                        }}
+                    >
+                        {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+                            <View style={[styles.formContainer, { width: width * 0.9 }]}>
+                                <TextInput
                                 style={{ marginTop: 24 }}
                                 onChangeText={handleChange('password')}
                                 onBlur={handleBlur('password')}
@@ -100,13 +80,15 @@ const SignUpScreen = () => {
                             // Add styles as needed
                             />
                             {touched.retypePassword && errors.retypePassword && <Text style={styles.error}>{errors.retypePassword}</Text>}
-                            <Button size='large' style={styles.button} onPress={() => handleSubmit} title="Sign Up" />
-                        </View>
-                    )}
-                </Formik>
-
+                            <Button size='large' style={styles.button} onPress={() => handleSubmit} title="Confirm" />
+                            </View>
+                        )}
+                    </Formik>
+                </View>
             </View>
-        </View>
+        </Container>
+
+
     )
 
 
@@ -119,9 +101,15 @@ const getStyles = (theme: 'light' | 'dark') => StyleSheet.create({
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        paddingTop: 48
+        paddingTop: 96
     },
-    logo: {
+    row: {
+        display:'flex',
+        flexDirection: 'row'
+    },
+    signupText: {
+        color: '#583EF2',
+        fontWeight: '500'
     },
     header: {
         display: 'flex',
@@ -133,13 +121,14 @@ const getStyles = (theme: 'light' | 'dark') => StyleSheet.create({
         fontSize: 16,
         lineHeight: 24,
         color: '#38385E',
+        fontWeight: '400',
         textAlign: 'center'
     },
     textHeader: {
         textAlign: 'center',
         fontSize: 28,
         lineHeight: 32,
-        fontWeight: 'bold',
+        fontWeight: '700',
         color: '#1F126B',
         marginVertical: 16
     },
@@ -165,7 +154,4 @@ const getStyles = (theme: 'light' | 'dark') => StyleSheet.create({
 })
 
 
-
-
-
-export default SignUpScreen
+export default CreatePasswordScreen

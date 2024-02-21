@@ -16,7 +16,7 @@ const ResetPassword = () => {
     const styles = getStyles(theme);
     const navigation = useNavigation()
     // Validation schema using Yup
-    const LoginSchema = Yup.object().shape({
+    const schema = Yup.object().shape({
         phonenumber: Yup.string()
             .required("Phone number must be provided.")
     });
@@ -40,7 +40,7 @@ const ResetPassword = () => {
 
                     <Formik
                         initialValues={{ phonenumber: '' }}
-                        validationSchema={LoginSchema}
+                        validationSchema={schema}
                         onSubmit={(values) => {
                             // Handle form submission here
                             Alert.alert('Login Submitted', JSON.stringify(values));
