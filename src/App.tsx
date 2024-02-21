@@ -15,12 +15,6 @@ import SignInScreen from './screens/sign-in';
 import SignUpScreen from './screens/sign-up';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-function Feed() {
-  return (
-    <SplashScreen/>
-  );
-}
-
 function Article() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -53,18 +47,22 @@ function DrawerNavigation() {
   );
 }
 
-export default function App() {
+const Navigator = () => {
   return (
-    <GestureHandlerRootView>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='sign-in'>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='sign-in'>
         <Stack.Screen name="spash" component={SplashScreen} />
         <Stack.Screen name="onboarding" component={OnBoardingScreen} />
         <Stack.Screen name="sign-in" component={SignInScreen} />
         <Stack.Screen name="sign-up" component={SignUpScreen} />
-        <Stack.Screen name="drawer" component={DrawerNavigation}/>
+        <Stack.Screen name="drawer" component={DrawerNavigation} />
       </Stack.Navigator>
-      </NavigationContainer>
-    </GestureHandlerRootView>
+    </NavigationContainer>
+  )
+}
+
+export default function App() {
+  return (
+    <Navigator />
   );
 }

@@ -9,6 +9,7 @@ import Text from '@/components/text'
 import TextInput from '@/components/text-input'
 import { GestureHandlerRootView, NativeViewGestureHandler, TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
+import Container from '@/components/container'
 
 const SignInScreen = () => {
     const theme = useColorScheme() || 'light';
@@ -30,7 +31,7 @@ const SignInScreen = () => {
     });
 
     return (
-
+        <Container>
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Image source={logo} />
@@ -92,6 +93,8 @@ const SignInScreen = () => {
                     </Formik>
                 </View>
             </View>
+        </Container>
+
 
     )
 
