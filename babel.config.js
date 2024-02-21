@@ -1,7 +1,7 @@
 
 
 
-const plugins = []
+const plugins = ['react-native-reanimated/plugin']
 
 plugins.push([
   'module-resolver',
