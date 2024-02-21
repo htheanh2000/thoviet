@@ -7,8 +7,12 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import SplashScreen from './screens/spash';
 import OnBoardingScreen from './screens/onboarding';
+import SignInScreen from './screens/sign-in';
+import SignUpScreen from './screens/sign-up';
 
 function Feed() {
   return (
@@ -34,8 +38,10 @@ function CustomDrawerContent(props: any) {
 }
 
 const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
 
-function MyDrawer() {
+
+function DrawerNavigation() {
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
@@ -49,8 +55,13 @@ function MyDrawer() {
 export default function App() {
   return (
     <NavigationContainer>
-      <OnBoardingScreen/>
-      {/* <MyDrawer /> */}
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="spash" component={SplashScreen} />
+      <Stack.Screen name="onboarding" component={OnBoardingScreen} />
+      <Stack.Screen name="sign-in" component={SignInScreen} />
+      <Stack.Screen name="sign-up" component={SignUpScreen} />
+      <Stack.Screen name="drawer" component={DrawerNavigation}/>
+    </Stack.Navigator>
     </NavigationContainer>
   );
 }

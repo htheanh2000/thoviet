@@ -1,4 +1,5 @@
 import Button from '@/components/button';
+import { useNavigation } from '@react-navigation/native';
 import React, { useRef, useState } from 'react';
 import { View, Text, Dimensions, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
@@ -34,6 +35,7 @@ const { width: viewportWidth } = Dimensions.get('window');
 const OnBoardingScreen = () => {
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const carouselRef = useRef<Carousel<CarouselItem>>(null);
+    const navigation = useNavigation() ;
     // Render each carousel item
     const renderItem = ({ item }: { item: CarouselItem }) => (
         <View style={styles.item}>
@@ -71,8 +73,8 @@ const OnBoardingScreen = () => {
                 <View style={styles.CTAView}>
                     <Text style={styles.CTATitle}>Welcome, let’s get started!</Text>
                     <View style={styles.RowCenter}>
-                        <Button style={styles.CTAButton} type='secondary' title='Login'></Button>
-                        <Button style={styles.CTAButton} title='Sign Up'></Button>
+                        <Button onPress={() => navigation.navigate('sign-in' as never)} style={styles.CTAButton} type='secondary' title='Login'></Button>
+                        <Button onPress={() => navigation.navigate('sign-up' as never)} style={styles.CTAButton} title='Sign Up'></Button>
                     </View>
                 </View>
                     :
@@ -92,6 +94,7 @@ const styles = StyleSheet.create({
     container: {
         height: '100%',
         position: 'relative',
+        backgroundColor: 'white'
     },
     carouselView: {
         display: 'flex',

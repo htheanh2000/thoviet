@@ -1,24 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Image, StyleSheet, Text, useColorScheme, View } from 'react-native'
-import logo  from '@/assets/images/logo.png'
+import logo  from '@/assets/images/logo_icon.png'
 import {  THEME } from '@/constant/color'
-import { useNavigation } from '@react-navigation/native';
-
-const SplashScreen = () => {
+const SignUpScreen = () => {
     const theme = useColorScheme() || 'light';
     const styles = getStyles(theme);
-    const navigation = useNavigation();
 
-    useEffect(() => {
-        setTimeout(()=> {
-            navigation.navigate('onboarding' as never)
-        },1000)
-    },[])
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Image style={styles.logo} source={logo}/>
-                <Text style={styles.textHeader}>WowHome</Text>
+                <Text style={styles.textHeader}>Sign up</Text>
+                <Text style={styles.subtitle}>Please enter your details to sign up and create an account.</Text>
             </View>
         </View>
     )
@@ -28,27 +21,33 @@ const SplashScreen = () => {
 
 const getStyles = (theme: 'light' | 'dark') => StyleSheet.create({
     container: {
-        backgroundColor: THEME[theme].primary, 
+        backgroundColor: THEME[theme].white, 
         height: '100%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
     },
     logo: {
-        width: 60,
-        height: 60
     },
     header: {
         display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center'
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    subtitle: {
+        fontSize: 14,
+        lineHeight: 24,
+        color: '#38385E',
+        maxWidth: 300,
+        textAlign: 'center'
     },
     textHeader: {
         textAlign:'center',
-        fontSize: 28,
+        fontSize: 22,
+        lineHeight: 32,
         fontWeight: 'bold',
-        color: THEME[theme].white,
-        marginLeft: 16
+        marginVertical: 16
     }
 })
 
@@ -56,4 +55,4 @@ const getStyles = (theme: 'light' | 'dark') => StyleSheet.create({
 
 
 
-export default SplashScreen
+export default SignUpScreen
