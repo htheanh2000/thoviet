@@ -23,9 +23,14 @@ const SignUpScreen = () => {
         password: Yup.string()
             .required("Password must be provided.")
             .matches(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,12})/,
-                "Password must be minimum 6 and maximum 12 characters."
+                /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}":;'<>?,./]).{8,}$/,
+                "Password must have at least 8 characters including 1 uppercase letter, 1 special character and alphanumeric characters"
             )
+            ,
+        retypePassword: Yup.string()
+        .oneOf([Yup.ref('password'), ''], 'Passwords must match')
+        .required('Confirming your password is required'),
+
     });
 
     return (
@@ -38,7 +43,7 @@ const SignUpScreen = () => {
             <View>
 
                 <Formik
-                    initialValues={{ email: '', password: '', name: '' }}
+                    initialValues={{ email: '', password: '', name: '', retypePassword: '' }}
                     validationSchema={LoginSchema}
                     onSubmit={(values) => {
                         // Handle form submission here
@@ -82,6 +87,19 @@ const SignUpScreen = () => {
                             // Add styles as needed
                             />
                             {touched.password && errors.password && <Text style={styles.error}>{errors.password}</Text>}
+
+                            <TextInput
+                                style={{ marginTop: 24 }}
+                                onChangeText={handleChange('retypePassword')}
+                                onBlur={handleBlur('retypePassword')}
+                                value={values.retypePassword}
+                                placeholder="Re-type Password"
+                                secureTextEntry // Hide password input
+                                icon='Key'
+                                label='Re-type Password'
+                            // Add styles as needed
+                            />
+                            {touched.retypePassword && errors.retypePassword && <Text style={styles.error}>{errors.retypePassword}</Text>}
                             <Button size='large' style={styles.button} onPress={() => handleSubmit} title="Sign Up" />
                         </View>
                     )}
@@ -100,7 +118,8 @@ const getStyles = (theme: 'light' | 'dark') => StyleSheet.create({
         height: '100%',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 32
     },
     logo: {
     },
