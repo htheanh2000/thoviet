@@ -7,6 +7,7 @@ import Button from '@/components/button'
 import * as Yup from 'yup';
 import Text from '@/components/text'
 import TextInput from '@/components/text-input'
+import Man from '@/assets/icons/man.svg'
 
 const SignUpScreen = () => {
     const theme = useColorScheme() || 'light';
@@ -32,6 +33,7 @@ const SignUpScreen = () => {
                 <Text style={styles.textHeader}>Sign up</Text>
                 <Text style={styles.subtitle}>Please enter your details to sign up and create an account.</Text>
             </View>
+                <Man width={120} height={120} />
 
             <View>
             <Formik
