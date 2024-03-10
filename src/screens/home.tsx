@@ -2,33 +2,18 @@ import Button from '@/components/button';
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, Dimensions, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import auth from '@react-native-firebase/auth';
+import AuthContainer from '@/components/auth-container';
+import { useUser } from '@/hooks/useUser';
 
 const Home = () => {
-    const [initializing, setInitializing] = useState(true);
-    const [user, setUser] = useState();
+    const [user] = useUser()
     const navigation = useNavigation();
-    // Handle user state changes
-    function onAuthStateChanged(user: any) {
-      setUser(user);
-      if (initializing) setInitializing(false);
-    }
-  
-    useEffect(() => {
-      const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-      return subscriber; // unsubscribe on unmount
-    }, []);
-  
-    if (initializing) return null;
     
-    if (!user) {
-      navigation.navigate('sign-in' as never)
-    }
-    
+    if(!user) return null;
     return (
-        <View style={styles.container}>
-            <Text>Home</Text>
-        </View>
+        <AuthContainer style={styles.container}>
+            <Text>Home: {user.username}</Text>
+        </AuthContainer>
     );
 };
 

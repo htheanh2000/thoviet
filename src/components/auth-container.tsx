@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, Dimensions, StyleSheet, Image, TouchableOpacity, ViewStyle } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 type Props = {
   children?: React.ReactNode;
@@ -25,27 +26,18 @@ const AuthContainer = ({children,style}: Props) => {
     }, []);
   
     if (initializing) return null;
-    
+
     if (!user) {
       navigation.navigate('sign-in' as never)
     }
     
     return (
-        <View style={styles.container}>
-            <Text>Home</Text>
-        </View>
+          <GestureHandlerRootView>
+          <View style={style}>
+              {children}
+          </View>
+      </GestureHandlerRootView>
     );
 };
-
-// Styles
-const styles = StyleSheet.create({
-    container: {
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white'
-    },
-});
 
 export default AuthContainer;

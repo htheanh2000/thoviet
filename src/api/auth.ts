@@ -19,11 +19,7 @@ const signUp = async (props: ISignUp) => {
                     username,
                     phonenumber
                 }
-                await createUser(newUser)
-                return {
-                    success: true,
-                    message: 'User account created & signed in!'
-                }
+               const response = await createUser(newUser)
         })
         .catch(error => {
             if (error.code === 'auth/email-already-in-use') {
@@ -40,5 +36,10 @@ const signUp = async (props: ISignUp) => {
         });
 }
 
-export { signUp };
+const signOut = async () => {
+   return auth().signOut()
+
+}
+
+export { signUp, signOut };
 export type { ISignUp };

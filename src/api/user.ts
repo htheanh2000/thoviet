@@ -1,24 +1,26 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import { signOut } from './auth';
 
 const usersCollection = firestore().collection('Users');
 
-const getUserById = async (id: string) => {
-    const user = await usersCollection.doc(id).get();
-    return user
+const getUser = async () => {
+    if(auth().currentUser) {
+        const uid = auth().currentUser?.uid;
+        const user = (await usersCollection.doc(uid).get()).data();
+        if(!user) return null ;
+        return user.data;
+    }
+    else return null
 }
 
 const createUser = async(data: any) => {
     if(auth().currentUser) {
         const uid = auth().currentUser?.uid;
-        return await usersCollection.doc(uid).set({
+        await usersCollection.doc(uid).set({
             data
-        });
+        })
     }
-    else {
-        throw('Not found current user')
-    }
-   
 }
 
 const updateUserById = async(id: string, data: any) => {
@@ -33,4 +35,4 @@ const deleteUserById = async(id: string, data: any) => {
 
 
 
-export {getUserById, createUser ,updateUserById, deleteUserById }
+export {getUser, createUser ,updateUserById, deleteUserById }
