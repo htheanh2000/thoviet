@@ -1,13 +1,10 @@
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { StyleSheet, View, TextInput } from 'react-native'
+import Icon from './icon'
 interface IProps {
-    rightTxt?: string,
     placeholder?: string,
     backgroundColor?: string,
-    showLine?: boolean,
     style?: any,
-    onRightTxtPress?: () => void
-    secureTextEntry?: boolean
 }
 
 interface IRef {
@@ -15,7 +12,7 @@ interface IRef {
 }
 
 const Search = forwardRef<IRef, IProps>((props, ref) => {
-    const {  style, placeholder, backgroundColor,secureTextEntry } = props
+    const {  style, placeholder, backgroundColor } = props
     const [value, setValue] = useState<string>('')
     const getValue = () => {
        return  value
@@ -28,8 +25,9 @@ const Search = forwardRef<IRef, IProps>((props, ref) => {
         [value],
     )
     return (
-        <View style={[styles.input, { marginBottom: 7, backgroundColor: backgroundColor },style]}>
-            <TextInput secureTextEntry={secureTextEntry} value={value} onChangeText={setValue} style={styles.txtInput} placeholder={placeholder} />
+        <View style={[styles.input, { backgroundColor: backgroundColor },style]}>
+            <Icon style={styles.icon} name={'Search'} />
+            <TextInput value={value} onChangeText={setValue} style={styles.txtInput} placeholder={placeholder} />
         </View>
     )
 })
@@ -37,7 +35,6 @@ const Search = forwardRef<IRef, IProps>((props, ref) => {
 Search.defaultProps = {
     placeholder: '',
     backgroundColor: '#fff',
-    secureTextEntry: false
 }
 
 
@@ -50,14 +47,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between'
     },
-    miniIcon: {
-        marginLeft: 20,
-        marginRight: 20
-    },
     txtInput: {
         flex: 1,
         fontSize: 18,
-        paddingHorizontal: 16
+        paddingHorizontal: 8
+    },
+    icon: {
+        marginLeft: 12
     },
  
 })
