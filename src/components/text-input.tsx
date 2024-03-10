@@ -43,6 +43,8 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({ style, label, icon, p
     );
 };
 
+CustomTextInput.displayName = "TextInput"
+
 const styles = StyleSheet.create({
     container: {
         // Customization for the container view

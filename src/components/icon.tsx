@@ -3,10 +3,10 @@ import Phone from '@/assets/icons/phone.svg'
 import Key from '@/assets/icons/key.svg'
 import EyeOn from '@/assets/icons/eye-on.svg'
 import EyeOff from '@/assets/icons/eye-off.svg'
-
+import Hamburger from '@/assets/icons/hamburger.svg'
 
 const icons = {
-    Man,Phone,Key,EyeOn,EyeOff
+    Man,Phone,Key,EyeOn,EyeOff,Hamburger
 }
 
 export type IconName  = keyof typeof icons
