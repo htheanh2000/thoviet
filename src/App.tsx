@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -15,6 +15,10 @@ import SignInScreen from './screens/sign-in';
 import SignUpScreen from './screens/sign-up';
 import ResetPassword from './screens/reset-password';
 import CreatePasswordScreen from './screens/create-new-password';
+import Home from './screens/home';
+import { useEffect, useState } from 'react';
+import auth from '@react-native-firebase/auth';
+import Loading from './screens/loading';
 
 function Article() {
   return (
@@ -51,20 +55,24 @@ function DrawerNavigation() {
 const Navigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='create-new-password'>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='spash'>
         <Stack.Screen name="spash" component={SplashScreen} />
         <Stack.Screen name="onboarding" component={OnBoardingScreen} />
         <Stack.Screen name="sign-in" component={SignInScreen} />
         <Stack.Screen name="sign-up" component={SignUpScreen} />
         <Stack.Screen name="reset-password" component={ResetPassword} />
         <Stack.Screen name="create-new-password" component={CreatePasswordScreen} />
+        <Stack.Screen name="home" component={Home} />
         <Stack.Screen name="drawer" component={DrawerNavigation} />
+
       </Stack.Navigator>
     </NavigationContainer>
   )
 }
 
 export default function App() {
+  console.log("App");
+
   return (
     <Navigator />
   );

@@ -5,16 +5,26 @@ import { TouchableOpacity, Text, StyleSheet, GestureResponderEvent } from 'react
 // Define the props types
 interface ButtonProps {
   title: string;
-  onPress?: (event: GestureResponderEvent) => void;
+  onPress?: () => void;
   style?: object;
   textStyle?: object;
-  type?: 'primary' | 'secondary' ;
+  type?: 'primary' | 'secondary' | 'disable';
   size?: 'medium' | 'large';
 }
 
-const Button: React.FC<ButtonProps> = ({ title, onPress, style, textStyle,size= 'medium', type='primary' }) => {
+const Button: React.FC<ButtonProps> = ({ title, onPress, style, textStyle,size= 'medium', type='primary'}) => {
+  
+  const handleOnPress = () => {
+    if(type == 'disable' ) {
+        return;
+    }
+    if (onPress) {
+      onPress();
+    }
+  }
+
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.button, styles[type], styles[size] ,style ]}>
+    <TouchableOpacity disabled={type == 'disable'} onPress={handleOnPress} style={[styles.button, styles[type], styles[size] ,style ]}>
       <Text style={[styles.text, styles[`text-${type}`], textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
@@ -37,6 +47,12 @@ const styles = StyleSheet.create({
   },
   'text-secondary': {
     color: '#78789D'
+  },
+  'text-disable': {
+    color: '#fff'
+  },
+  disable: {
+    backgroundColor: '#888888'
   },
   primary: {
     backgroundColor: '#583EF2'

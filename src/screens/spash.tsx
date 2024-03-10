@@ -1,29 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Image, StyleSheet, Text, useColorScheme, View } from 'react-native'
 import logo  from '@/assets/images/logo.png'
 import {  THEME } from '@/constant/color'
-import { useNavigation } from '@react-navigation/native';
+import Container from '@/components/container';
 
 const SplashScreen = () => {
     const theme = useColorScheme() || 'light';
     const styles = getStyles(theme);
-    const navigation = useNavigation();
-
-    useEffect(() => {
-        setTimeout(()=> {
-            navigation.navigate('onboarding' as never)
-        },1000)
-    },[])
     return (
-        <View style={styles.container}>
+        <Container style={styles.container}>
             <View style={styles.header}>
                 <Image style={styles.logo} source={logo}/>
                 <Text style={styles.textHeader}>WowHome</Text>
             </View>
-        </View>
+        </Container>
     )
-
-    
 }
 
 const getStyles = (theme: 'light' | 'dark') => StyleSheet.create({
