@@ -9,7 +9,7 @@ interface ButtonProps {
   style?: object;
   textStyle?: object;
   type?: 'primary' | 'secondary' | 'disable';
-  size?: 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large';
 }
 
 const Button: React.FC<ButtonProps> = ({ title, onPress, style, textStyle,size= 'medium', type='primary'}) => {
@@ -59,6 +59,11 @@ const styles = StyleSheet.create({
   },
   secondary: {
     backgroundColor: '#F9F9FB'
+  },
+  small: {
+    width: 120,
+    height: 32,
+    borderRadius: 4,
   },
   medium: {
     width: 145,

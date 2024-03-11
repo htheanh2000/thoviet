@@ -16,9 +16,8 @@ import SignUpScreen from './screens/sign-up';
 import ResetPassword from './screens/reset-password';
 import CreatePasswordScreen from './screens/create-new-password';
 import Home from './screens/home';
-import { useEffect, useState } from 'react';
-import auth from '@react-native-firebase/auth';
 import Loading from './screens/loading';
+import ServiceBooking from './screens/service-booking';
 
 function Article() {
   return (
@@ -55,7 +54,7 @@ function DrawerNavigation() {
 const Navigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='spash'>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='service-booking'>
         <Stack.Screen name="spash" component={SplashScreen} />
         <Stack.Screen name="onboarding" component={OnBoardingScreen} />
         <Stack.Screen name="sign-in" component={SignInScreen} />
@@ -63,8 +62,8 @@ const Navigator = () => {
         <Stack.Screen name="reset-password" component={ResetPassword} />
         <Stack.Screen name="create-new-password" component={CreatePasswordScreen} />
         <Stack.Screen name="home" component={Home} />
+        <Stack.Screen name="service-booking" component={ServiceBooking}  />
         <Stack.Screen name="drawer" component={DrawerNavigation} />
-
       </Stack.Navigator>
     </NavigationContainer>
   )
