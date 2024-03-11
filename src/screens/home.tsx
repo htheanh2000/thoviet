@@ -94,6 +94,11 @@ const Home = () => {
     const [service, setService] = useState(services[0].name)
     const carouselRef = useRef<Carousel<CarouselItem>>(null);
     const navigation = useNavigation();
+
+    const  selectService = () => {
+        navigation.navigate('service-booking' as never);
+    }
+
     // Render each carousel item
     const renderItem = ({ item }: { item: CarouselItem }) => (
         <TouchableOpacity>
@@ -134,7 +139,7 @@ const Home = () => {
                 <View style={styles.serviceContainer}>
                     {
                         services.map(item =>
-                            <TouchableWithoutFeedback onPress={() => setService(item.name)} key={item.name}>
+                            <TouchableWithoutFeedback onPress={selectService} key={item.name}>
                                 <View style={[styles.service, item.name == service ? styles.serviceActive : {}]} >
                                     <Icon name={item.icon} />
                                     <Text style={styles.serviceText}>{item.name}</Text>

@@ -11,9 +11,15 @@ import Repair from '@/assets/icons/repair.svg'
 import Pest from '@/assets/icons/pest.svg'
 import Food from '@/assets/icons/food.svg'
 import Laundry from '@/assets/icons/laundry.svg'
+import Back from '@/assets/icons/back.svg'
+import Calendar from '@/assets/icons/calendar.svg'
+import Time from '@/assets/icons/time.svg'
+import Location from '@/assets/icons/location.svg'
 
 const icons = {
-    Man,Phone,Key,EyeOn,EyeOff,Hamburger,Search, Home , Clean, Repair, Pest, Food, Laundry
+    Man,Phone,Key,EyeOn,EyeOff,Hamburger,Search, Home , 
+    Clean, Repair, Pest, Food, Laundry, Back,Calendar, Time,
+    Location
 }
 
 export type IconName  = keyof typeof icons

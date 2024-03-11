@@ -54,7 +54,7 @@ function DrawerNavigation() {
 const Navigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='service-booking'>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='home'>
         <Stack.Screen name="spash" component={SplashScreen} />
         <Stack.Screen name="onboarding" component={OnBoardingScreen} />
         <Stack.Screen name="sign-in" component={SignInScreen} />
