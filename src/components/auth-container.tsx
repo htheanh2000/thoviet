@@ -33,9 +33,9 @@ const AuthContainer = ({children,style}: Props) => {
     
     return (
           <GestureHandlerRootView>
-          <View style={style}>
-              {children}
-          </View>
+            <View style={[{backgroundColor: '#fff'},style]}>
+                {children}
+            </View>
       </GestureHandlerRootView>
     );
 };

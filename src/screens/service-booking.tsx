@@ -2,18 +2,57 @@ import AuthContainer from "@/components/auth-container"
 import Icon from "@/components/icon"
 import { useNavigation } from "@react-navigation/native"
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
-import { ScrollView } from "react-native-gesture-handler"
+import { ScrollView, TouchableWithoutFeedback } from "react-native-gesture-handler"
+
 import { SafeAreaView } from "react-native-safe-area-context"
 import FullHouseCleanImage from "@/assets/images/fullhouse_clean.png"
 import DatePicker from 'react-native-date-picker'
-import { useState } from "react"
+import React, { useState } from "react"
 import Button from "@/components/button"
 import { formatDate } from "@/utils/date"
 import CustomTextInput from "@/components/text-input"
+import CheckBox from "@/components/checkbox"
+import Avatar1 from '@/assets/images/avatar/1.png'
+import Avatar2 from '@/assets/images/avatar/2.png'
+import Avatar3 from '@/assets/images/avatar/3.png'
 
 interface IProps {
     service: string
 }
+
+const workers = [
+{
+    avatar: Avatar1,
+    name: 'Janet Anderson',
+    rate: '5.0',
+},
+{
+    avatar: Avatar2,
+    name: 'Jack Middleton',
+    rate: '4.5',
+},
+{
+    avatar: Avatar3,
+    name: 'Anna Kimberly',
+    rate: '4.0',
+},
+{
+    avatar: Avatar1,
+    name: 'Janet Anderson 1',
+    rate: '5.0',
+},
+{
+    avatar: Avatar2,
+    name: 'Jack Middleton 2',
+    rate: '4.5',
+},
+{
+    avatar: Avatar3,
+    name: 'Anna Kimberly 3',
+    rate: '4.0',
+}
+
+]
 
 const ServiceBooking = () => {
     // const {service} = props
@@ -25,6 +64,9 @@ const ServiceBooking = () => {
 
     const [location, setLocation] = useState("")
     const [note, setNote] = useState("")
+
+    const [isSelected, setSelection] = useState(0);
+
 
     const navigation = useNavigation()
     const goBack = () => {
@@ -114,17 +156,41 @@ const ServiceBooking = () => {
                                 multiline={true}
                                 numberOfLines={4}
                                 value={note} onChangeText={setNote} style={styles.note}
-                                 placeholder="Anything for us to notice?
+                                placeholder="Anything for us to notice?
                                  Eg: Bathroom needs harder clean" />
                         </View>
                     </View>
                 </View>
                 <View style={styles.workerView}>
-                    <View style={styles.row}>
-                       <Text style={styles.label}>Available worker</Text>
+                    <Text style={styles.label}>Available worker</Text>
+                    <ScrollView
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                    >
+                        <View style={styles.workersList}>
+                            {
+                                workers.map((worker, index) =>
+                                    <TouchableWithoutFeedback onPress={() => setSelection(index)} key={worker.name} style={styles.workerCard}>
+                                       <View
+                                            style={styles.checkbox}
+                                       >
+                                         <CheckBox
+                                            value={isSelected == index}
+                                            // onValueChange={() => setSelection(index)}
+                                        />
+                                       </View>
+                                        <Image style={styles.workerImage} source={Avatar1}></Image>
+                                        <Text style={styles.workerText}>Janet Anderson</Text>
+                                        <Text style={styles.workerRate}>5.0 <Icon name="Star"></Icon></Text>
+                                        <Button style={styles.workerCTA} textStyle={{ color: '#583EF2' }} size='small' title="View" type='secondary'></Button>
+                                    </TouchableWithoutFeedback>
+                                )
+                            }
 
-                    </View>
+                        </View>
+                    </ScrollView>
                 </View>
+
                 <View style={{ height: 80 }}></View>
 
             </ScrollView>
@@ -182,7 +248,7 @@ const styles = StyleSheet.create({
     descriptionView: {
         marginTop: 16,
         marginHorizontal: 20,
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: '#EAEAFF',
         padding: 16,
         borderRadius: 16
@@ -201,7 +267,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
     },
     input: {
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
         borderColor: '#EAEAFF',
         paddingBottom: 8,
         marginVertical: 8,
@@ -210,7 +276,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     noteView: {
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
         borderColor: '#EAEAFF',
         paddingBottom: 8,
     },
@@ -227,6 +293,54 @@ const styles = StyleSheet.create({
     },
     workerView: {
         marginHorizontal: 24
+    },
+    workerCard: {
+        marginRight: 16,
+        borderWidth: 1,
+        borderColor: '#EAEAFF',
+        borderBottomRightRadius: 32,
+        borderBottomLeftRadius: 32,
+        borderTopRightRadius: 32,
+        padding: 8,
+        paddingVertical: 16,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    workerImage: {
+        backgroundColor: '#FFEBF0',
+        borderBottomRightRadius: 32,
+        borderBottomLeftRadius: 32,
+        borderTopRightRadius: 32,
+    },
+    workerText: {
+        fontSize: 18,
+        textAlign: 'center',
+        maxWidth: 120,
+        fontWeight: '500',
+        marginTop: 16
+    },
+    workerRate: {
+        marginTop: 8,
+        marginBottom: 8,
+        fontSize: 16
+    },
+    workerCTA: {
+        backgroundColor: '#F4F3FD',
+        color: '#583EF2',
+        marginBottom: 8
+    },
+    workersList: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    checkbox: {
+        marginBottom: 16,
+        marginLeft: 8,
+        width: '100%',
+
     }
 })
 

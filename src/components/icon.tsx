@@ -15,11 +15,13 @@ import Back from '@/assets/icons/back.svg'
 import Calendar from '@/assets/icons/calendar.svg'
 import Time from '@/assets/icons/time.svg'
 import Location from '@/assets/icons/location.svg'
+import Star from '@/assets/icons/star.svg'
+import Checkbox from '@/assets/icons/checkbox.svg'
 
 const icons = {
     Man,Phone,Key,EyeOn,EyeOff,Hamburger,Search, Home , 
     Clean, Repair, Pest, Food, Laundry, Back,Calendar, Time,
-    Location
+    Location, Star, Checkbox
 }
 
 export type IconName  = keyof typeof icons
