@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, Dimensions, StyleSheet, Image, TouchableOpacity, ViewStyle } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { screenHeight } from '@/utils/screen';
 
 type Props = {
   children?: React.ReactNode;
@@ -30,14 +31,23 @@ const AuthContainer = ({children,style}: Props) => {
     if (!user) {
       navigation.navigate('sign-in' as never)
     }
+
+    const styles = StyleSheet.create({
+      container: {
+        backgroundColor: '#fff',
+        minHeight: screenHeight
+      }
+    })
     
     return (
           <GestureHandlerRootView>
-            <View style={[{backgroundColor: '#fff'},style]}>
+            <View style={[styles.container,style]}>
                 {children}
             </View>
       </GestureHandlerRootView>
     );
 };
+
+
 
 export default AuthContainer;

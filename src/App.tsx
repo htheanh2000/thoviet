@@ -18,6 +18,7 @@ import CreatePasswordScreen from './screens/create-new-password';
 import Home from './screens/home';
 import Loading from './screens/loading';
 import ServiceBooking from './screens/service-booking';
+import ConfirmBooking from './screens/confirm-booking';
 
 function Article() {
   return (
@@ -63,6 +64,7 @@ const Navigator = () => {
         <Stack.Screen name="create-new-password" component={CreatePasswordScreen} />
         <Stack.Screen name="home" component={Home} />
         <Stack.Screen name="service-booking" component={ServiceBooking}  />
+        <Stack.Screen name="confirm-booking" component={ConfirmBooking}  />
         <Stack.Screen name="drawer" component={DrawerNavigation} />
       </Stack.Navigator>
     </NavigationContainer>

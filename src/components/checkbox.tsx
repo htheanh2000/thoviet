@@ -6,14 +6,12 @@ import Icon from './icon';
 
 interface IProps {
     value: Boolean,
-    onValueChange?: () => void,
     style?: any,
 }
 
-const Checkbox = ({ value , onValueChange, style }: IProps) => {
+const Checkbox = ({ value, style }: IProps) => {
   return (
     <TouchableWithoutFeedback
-      onPress={onValueChange}
       style={[styles.conntainer, {backgroundColor: value ? '#583EF2' : '#EAEAFF' },style]}
     >
       {value && (

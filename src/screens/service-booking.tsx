@@ -21,36 +21,36 @@ interface IProps {
 }
 
 const workers = [
-{
-    avatar: Avatar1,
-    name: 'Janet Anderson',
-    rate: '5.0',
-},
-{
-    avatar: Avatar2,
-    name: 'Jack Middleton',
-    rate: '4.5',
-},
-{
-    avatar: Avatar3,
-    name: 'Anna Kimberly',
-    rate: '4.0',
-},
-{
-    avatar: Avatar1,
-    name: 'Janet Anderson 1',
-    rate: '5.0',
-},
-{
-    avatar: Avatar2,
-    name: 'Jack Middleton 2',
-    rate: '4.5',
-},
-{
-    avatar: Avatar3,
-    name: 'Anna Kimberly 3',
-    rate: '4.0',
-}
+    {
+        avatar: Avatar1,
+        name: 'Janet Anderson',
+        rate: '5.0',
+    },
+    {
+        avatar: Avatar2,
+        name: 'Jack Middleton',
+        rate: '4.5',
+    },
+    {
+        avatar: Avatar3,
+        name: 'Anna Kimberly',
+        rate: '4.0',
+    },
+    {
+        avatar: Avatar1,
+        name: 'Janet Anderson 1',
+        rate: '5.0',
+    },
+    {
+        avatar: Avatar2,
+        name: 'Jack Middleton 2',
+        rate: '4.5',
+    },
+    {
+        avatar: Avatar3,
+        name: 'Anna Kimberly 3',
+        rate: '4.0',
+    }
 
 ]
 
@@ -65,12 +65,16 @@ const ServiceBooking = () => {
     const [location, setLocation] = useState("")
     const [note, setNote] = useState("")
 
-    const [isSelected, setSelection] = useState(0);
+    const [isSelected, setSelection] = useState<number | null>();
 
 
     const navigation = useNavigation()
     const goBack = () => {
         navigation.goBack();
+    }
+
+    const handleSubmit = () => {
+        navigation.navigate('confirm-booking' as never)
     }
 
     return (
@@ -170,29 +174,37 @@ const ServiceBooking = () => {
                         <View style={styles.workersList}>
                             {
                                 workers.map((worker, index) =>
-                                    <TouchableWithoutFeedback onPress={() => setSelection(index)} key={worker.name} style={styles.workerCard}>
-                                       <View
+                                    <TouchableOpacity onPress={() => setSelection(isSelected == index ? null : index)} key={worker.name} style={styles.workerCard}>
+                                        <View
                                             style={styles.checkbox}
-                                       >
-                                         <CheckBox
-                                            value={isSelected == index}
-                                            // onValueChange={() => setSelection(index)}
-                                        />
-                                       </View>
+                                        >
+                                            <CheckBox
+                                                value={isSelected == index}
+                                            />
+                                        </View>
                                         <Image style={styles.workerImage} source={Avatar1}></Image>
                                         <Text style={styles.workerText}>Janet Anderson</Text>
                                         <Text style={styles.workerRate}>5.0 <Icon name="Star"></Icon></Text>
                                         <Button style={styles.workerCTA} textStyle={{ color: '#583EF2' }} size='small' title="View" type='secondary'></Button>
-                                    </TouchableWithoutFeedback>
+                                    </TouchableOpacity>
                                 )
                             }
 
                         </View>
+
                     </ScrollView>
                 </View>
 
-                <View style={{ height: 80 }}></View>
-
+                <View style={styles.submitView}>
+                    <View style={styles.stepView}>
+                        <View style={[styles.dot, styles.active]}></View>
+                        <View style={styles.line}></View>
+                        <View style={styles.dot}></View>
+                        {/* <View style={styles.line}></View>
+                        <View style={styles.dot}></View> */}
+                    </View>
+                    <Button style={{minWidth: 200}} onPress={handleSubmit} title="Next"></Button>
+                </View>
             </ScrollView>
         </AuthContainer>
     )
@@ -341,7 +353,50 @@ const styles = StyleSheet.create({
         marginLeft: 8,
         width: '100%',
 
+    },
+    submitView: {
+        minHeight: 80,
+        marginTop: 16,
+        borderTopLeftRadius: 32,
+        borderTopRightRadius: 32,
+
+        bottom: 0,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 24,
+        backgroundColor: '#fff',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
+        
+    },
+    stepView: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    dot: {
+        width: 12,
+        height: 12,
+        borderRadius: 100,
+        backgroundColor: '#FFEBF0'
+    },
+    line: {
+        width: 24,
+        height: 1,
+        backgroundColor: '#FFEBF0'
+    },
+    active: {
+        backgroundColor: '#F3A8A2'
     }
+
 })
 
 export default ServiceBooking
