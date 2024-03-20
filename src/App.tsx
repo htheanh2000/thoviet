@@ -19,6 +19,7 @@ import Home from './screens/home';
 import Loading from './screens/loading';
 import ServiceBooking from './screens/service-booking';
 import ConfirmBooking from './screens/confirm-booking';
+import BookingSuccess from './screens/booking-successfully';
 
 function Article() {
   return (
@@ -65,6 +66,7 @@ const Navigator = () => {
         <Stack.Screen name="home" component={Home} />
         <Stack.Screen name="service-booking" component={ServiceBooking}  />
         <Stack.Screen name="confirm-booking" component={ConfirmBooking}  />
+        <Stack.Screen name="booking-successfully" component={BookingSuccess}  />
         <Stack.Screen name="drawer" component={DrawerNavigation} />
       </Stack.Navigator>
     </NavigationContainer>

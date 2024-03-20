@@ -13,7 +13,7 @@ const ConfirmBooking = () => {
     }
 
     const handleSubmit = () => {
-        navigation.navigate('confirm-booking' as never)
+        navigation.navigate('booking-successfully' as never)
     }
 
     return (
